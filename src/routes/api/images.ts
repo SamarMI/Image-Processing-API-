@@ -20,8 +20,7 @@ images.get('/', async (req: express.Request, res: express.Response , next: expre
           const resizedImage = await resizeImage(filename, height, width)
           await fsPromises.writeFile(outFilePath, resizedImage)
         }
-        console.log('filename : ' + filename)
-        console.log('height : ' + height)
+        
         console.log('width : ' + width)
         res.sendFile(outFilePath, function (err) {
           if (err) {
