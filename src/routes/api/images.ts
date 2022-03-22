@@ -2,10 +2,10 @@ import { promises as fsPromises } from 'fs'
 import fs from 'fs'
 import path from 'path'
 import { resizeImage } from '../../utilities/imagesResizing'
-import express from 'express'
+import express, { NextFunction } from 'express'
 const images = express.Router()
 
-images.get('/', async (req, res, next) => {
+images.get('/', async (req: express.Request, res: express.Response , next: express.NextFunction): Promise<void> => {
   try {
         
         const width = parseInt(req.query.width as string)
@@ -23,7 +23,6 @@ images.get('/', async (req, res, next) => {
         console.log('filename : ' + filename)
         console.log('height : ' + height)
         console.log('width : ' + width)
-        resizeImage(filename, height, width)
         res.sendFile(outFilePath, function (err) {
           if (err) {
             next(err)
